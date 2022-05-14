@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+//I just wanna try committing this comment in vscode
 static float fixedPaidWorker() {
     char workerType;
     int hours;
