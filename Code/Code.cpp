@@ -1,81 +1,97 @@
 #include <iostream>
 using namespace std;
 
-//I just wanna try committing this comment in vscode
+
 static float fixedPaidWorker() {
     char workerType;
-    int hours;
+    float fixedSalary;
 
+    cout << "Input worker type please. P = Manager, B = Non-Manager" << endl;
     do {
-        cout << "Input worker type please. P = Manager, B = Non-Manager" << endl;
         cin >> workerType;
     } while (workerType != 'P' && workerType != 'B');
+
+    cout << "Input worker fixed salary." << endl;
+    do {
+        cin >> fixedSalary;
+    } while (fixedSalary <0);
 
     switch (workerType)
     {
     case 'P': //Manager
-        return 300; // fixed salary TODO
+        return fixedSalary;
 
     case 'B': //Non-Manager
+
+    int hours;
+    float overtimePay;
+
+        cout << "Hours worked: (additional)" << endl;
         do {
-            cout << "Hours worked:" << endl;
             cin >> hours;
         } while (hours < 0);
 
         if (hours <= 10) {
-            return (hours * 15);
+            overtimePay = (hours * 15);
         }
         else if (hours <= 20) {
-            return ((hours - 10) * 12) + 150;
+            overtimePay = ((hours - 10) * 12) + 150;
         }
         else {
-            return (10 * 12) + 150; //maximum overtime pay
+            overtimePay = 270; //maximum overtime pay
         }
+
+        return fixedSalary + overtimePay;
     }
+
+    return 0;//if you feel useless in life, just remember this line of code.
 }
 
 static float contractWorker() {
-    int hour;
+    float payment;
+    int hours;
     char category;
 
+    cout << "Please enter a category (B = Recovery, S = Maintainance)" << endl;
     do {
-        cout << "Please enter a category (B = Recovery, S = Maintainance)" << endl;
         cin >> category;
     } while (category != 'S' && category != 'B');
 
+    cout << "Hours worked:" << endl;
     do {
-        cout << "Hours worked:" << endl;
-        cin >> hour;
-    } while (hour > 100);
+        cin >> hours;
+    } while (hours < 0);
+
+    if(hours > 100) hours = 100;//limitation
 
     switch (category) {
     case 'S':
-        if (hour <= 50) {
-            return (hour * 10);
+        if (hours <= 50) {
+            payment = hours * 10;
         }
         else {
-            return (((hour - 50) * 5) + 500);
+            payment = (((hours - 50) * 5) + 500);
         }
         break;
     case 'B':
-        return (hour * 20);
-        break;
-    default:
+        payment = hours * 20;
         break;
     }
+
+    return payment;
 }
 
 static float subcontractWorker() {
     char toySize;
     int numToys;
 
+    cout << "Type in the code for the size of the toy. ie, B - Large, S - Medium, K - small:" << endl;
     do {
-        cout << "Type in the code for the size of the toy. ie, B - Large, S - Medium, K - small:" << endl;
         cin >> toySize;
     } while (toySize != 'B' && toySize != 'S' && toySize != 'K');
 
+    cout << "Insert number of toys made this month:" << endl;
     do {
-        cout << "Insert number of toys made this month:" << endl;
         cin >> numToys;
     } while (numToys < 0);
 
@@ -93,6 +109,7 @@ static float subcontractWorker() {
         break;
 
     default:
+    //(:
         break;
     }
 }
@@ -112,13 +129,13 @@ int main() {
     cout << "Please enter the employee's name:" << endl;
     cin >> employeeName;
 
-    do {
         cout << "Please enter the employee's ID:" << endl;
+    do {
         cin >> employeeId;
     } while (employeeId < 0);
 
-    do {
         cout << "Please enter the employee code (G, K, S):" << endl;
+    do {
         cin >> employeeType;
     } while (employeeType != 'G' && employeeType != 'K' && employeeType != 'S');
 
